@@ -5,7 +5,7 @@
   <title>Medplay</title>
   <link rel="shortcut icon" href="{{ url_for('static', filename="img/M.png")}}">
   <script src="https://kit.fontawesome.com/ecaf831147.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 
   <link rel="stylesheet" href="{{ url_for('static', filename="css/style.css")}}">
   <!-- Google tag (gtag.js) -->
@@ -44,7 +44,7 @@
         <i class="fa-solid fa-list"></i>
         <span>Queue</span>
       </div>
-      <div class="favourites-btn menu-btn no-for-now" id="favourites-btn" onclick="displayFavourites()">
+      <div class="favourites-btn menu-btn" id="favourites-btn" onclick="displayFavourites()">
         <i class="fa-regular fa-heart"></i>
         <span>Favourites</span>
       </div>
@@ -95,7 +95,7 @@
     <div class="main-center">
       <div class="feed" id="feed">
         <div class="relative-holder">
-          <div class="classification no-for-now" id="classification">
+          <div class="classification" id="classification">
             <div class="class-line">
               <div class="class-line-change" id="class-line-change"></div>
             </div>
@@ -286,7 +286,7 @@
 
   <div class="music-player-song-details">
     <span id="player-song-name" class="music-player-song-name">Song name</span>
-    <span id="player-artist-name" class="music-player-artist-name no-for-now"> Artist name</span>
+    <span id="player-artist-name" class="music-player-artist-name"> Artist name</span>
   </div>
 
   <div class="music-player-icon">
@@ -417,10 +417,6 @@
 </div>
 
 <div class="no-next-song-holder" id="no-next-song-holder">
-  
-</div>
-<div class="short-notif-technical" id="short-notif">
-  <span><i class="fas fa-exclamation-circle"></i> Some features of Medplay are temporarily unavailable due to technical issues. We appreciate your patience—music streaming remains accessible.</span>
   
 </div>
 
