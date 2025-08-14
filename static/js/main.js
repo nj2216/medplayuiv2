@@ -53,6 +53,53 @@ let isDownloading = false;
 let ffmpeg = null;
 let isBlocked = false;
 
+
+//USER ID GEN
+function getOrCreateUserId() {
+    let userId = localStorage.getItem("userId");
+
+    if (!userId) {
+        // Generate UUID v4
+        userId = ([1e7]+-1e3+-4e3+-8e3+-1e11)
+            .replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+
+        localStorage.setItem("userId", userId);
+    }
+
+    return userId;
+}
+
+function checkIsFirst() {
+    const isFirst = localStorage.getItem("isFirst");
+    const userId = getOrCreateUserId();
+
+    if (!isFirst || isFirst !== "true") {
+        localStorage.clear();
+        localStorage.setItem("isFirst", "true");
+        localStorage.setItem("userId", userId); // Restore userId after clearing
+
+        // Send first-time event
+        if (typeof gtag === "function") {
+            gtag("event", "is_first", {
+                event_category: "user",
+                event_label: "First Visit",
+                value: 1
+            });
+        }
+
+        console.log(`First time visit. User ID: ${userId}`);
+    } else {
+        console.log(`Returning visit. User ID: ${userId}`);
+    }
+
+    // Set the userId globally for all future gtag events
+    if (typeof gtag === "function") {
+        gtag("set", { user_id: userId });
+    }
+}
+
 function load(){
     location.reload();
 }
@@ -2047,6 +2094,7 @@ function retrieve() {
         });
 }
 document.addEventListener("DOMContentLoaded", () => {
+    checkIsFirst();
     checkSara();
     retrieve();
     getFavourites();
