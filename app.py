@@ -14,7 +14,7 @@ def add_security_headers(response):
     response.headers['Cross-Origin-Embedder-Policy'] = 'require-corp'
     return response
 
-API_URL = "https://api-medplay.vercel.app"
+API_URL = "https://apiip-three.vercel.app"
 
 @app.route('/')
 def home():

@@ -98,6 +98,17 @@ function checkIsFirst() {
     if (typeof gtag === "function") {
         gtag("set", { user_id: userId });
     }
+    // Wrap gtag event so all events include user_id automatically
+    if (typeof gtag === "function") {
+        const originalGtag = gtag;
+        window.gtag = function(command, action, params) {
+            if (command === 'event') {
+            params = params || {};
+            params.user_id = userId; // attach userId to all events
+            }
+            originalGtag(command, action, params);
+        };
+    };
 }
 
 function load(){
